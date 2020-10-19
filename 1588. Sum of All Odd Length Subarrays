@@ -1,0 +1,22 @@
+/*
+Given an array of positive integers arr, calculate the sum of all possible odd-length subarrays.
+
+A subarray is a contiguous subsequence of the array.
+
+Return the sum of all odd-length subarrays of arr.
+
+*/
+var sumOddLengthSubarrays = function(arr) {
+    let result = 0;
+    for(i=0; i<arr.length; i=i+2){
+        let l = 0;
+        let r = l+i;
+        while(arr[r] !== undefined){
+            result += arr.slice(l,r+1).reduce((a,b)=>a+b);
+            
+            l++;
+            r++;
+        }
+    }
+    return result;
+};
