@@ -1,0 +1,28 @@
+/*
+In a deck of cards, each card has an integer written on it.
+
+Return true if and only if you can choose X >= 2 such that it is possible to split the entire deck into 1 or more groups of cards, where:
+
+Each group has exactly X cards.
+All the cards in each group have the same integer.
+*/
+
+var hasGroupsSizeX = function (deck) {
+  var count = {};
+  deck.map((x) => (count[x] ? (count[x] += 1) : (count[x] = 1)));
+
+  var arr = Object.values(count);
+  var num = arr[0];
+
+  for (const i of arr) {
+    num = gcd(num, i);
+    if (num < 2) {
+      return false;
+    }
+  }
+  return num > 1;
+};
+
+var gcd = function (a, b) {
+  return a == 0 ? b : gcd(b % a, a);
+};
