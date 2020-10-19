@@ -1,0 +1,26 @@
+/*
+Given a m * n matrix of distinct numbers, return all lucky numbers in the matrix in any order.
+
+A lucky number is an element of the matrix such that it is the minimum element in its row and maximum in its column.
+*/
+var luckyNumbers  = function(matrix) {
+    let map = new Map();
+    let result =[];
+   
+    for(let i =0; i<matrix.length; i++){
+        let min = Math.min(...matrix[i]);
+        map.set(min);
+    }
+    for(let i =0; i<matrix[0].length; i++){
+        let max = -Infinity;
+        for(let j=0; j<matrix.length; j++){
+            if(matrix[j][i]>max){
+                max = matrix[j][i];
+            }
+        }
+        if(map.has(max)){
+            result.push(max);
+        }
+    }
+    return result;
+};
