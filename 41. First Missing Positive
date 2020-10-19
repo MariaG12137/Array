@@ -1,0 +1,19 @@
+/*
+Given an unsorted integer array nums, find the smallest missing positive integer.
+
+Follow up: Could you implement an algorithm that runs in O(n) time and uses constant extra space.?
+*/
+var firstMissingPositive = function(nums) {
+    let result = [];
+    for(let num of nums){
+        if(num>0 && num <= 300){
+            result[num] = 1;
+        }
+    }
+    for(let i=1; i<result.length; i++){
+        if(result[i]===undefined){
+            return i;
+        }
+    }
+    return result.length===0?1:result.length;
+};
