@@ -1,0 +1,23 @@
+/*
+Given an array arr of positive integers sorted in a strictly increasing order, and an integer k.
+
+Find the kth positive integer that is missing from this array.
+*/
+var findKthPositive = function(arr, k) {
+    let result = [];
+    let res = 1;
+    for(let num of arr){
+        result[num] = num;
+    }
+   
+    for(let i=1; i<result.length;i++){
+        if(k===0){
+            break;
+        }
+        if(result[i]===undefined){
+            res = i;
+            k--;
+        }
+    }
+    return k===0?res:result[result.length-1]+k
+};
