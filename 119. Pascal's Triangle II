@@ -1,0 +1,28 @@
+/*
+Given an integer rowIndex, return the rowIndexth row of the Pascal's triangle.
+
+Notice that the row index starts from 0.
+*/
+var getRow = function(rowIndex) {
+    if(rowIndex === 0){
+        return [1];
+    }
+    if(rowIndex === 1){
+        return [1,1];
+    }
+
+    let result = [1,1];
+    
+    while(result.length-1 !== rowIndex){
+        result.push(1);
+        let prev = result.shift();
+        
+        for(let i=1; i<result.length;i++){
+            let curr = result.shift();
+            result.push(prev + curr);
+            prev = curr;  
+        }
+        result.push(1);
+    }
+    return result;
+};
