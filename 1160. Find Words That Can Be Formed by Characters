@@ -1,0 +1,40 @@
+/*
+You are given an array of strings words and a string chars.
+
+A string is good if it can be formed by characters from chars (each character can only be used once).
+
+Return the sum of lengths of all good strings in words.
+
+*/
+var countCharacters = function(words, chars) {
+    let map = new Map();
+    let result = 0;
+    chars = chars.split('');
+    for(let char of chars){
+        if(!map.has(char)){
+            map.set(char,[1,0])
+        }else{
+            map.get(char)[0]++;
+        }
+    }
+  
+    for(let word of words){
+        let form = true;
+        for(let char of word){
+            if(map.has(char)){
+                map.get(char)[1]++;
+                }
+            if(!map.has(char)||map.get(char)[0]<map.get(char)[1]){
+                    form = false;
+                    break;
+            }
+        }
+        if(form === true){
+            result += word.length;
+        }
+        for(let value of map.values()){
+            value[1] = 0;
+        }
+    }
+    return result;
+};
