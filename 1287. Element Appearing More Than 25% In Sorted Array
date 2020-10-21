@@ -1,0 +1,18 @@
+/*
+Given an integer array sorted in non-decreasing order, there is exactly one integer in the array that occurs more than 25% of the time.
+
+Return that integer.
+*/
+var findSpecialInteger = function(arr) {
+    let map = new Map();
+    for(let num of arr){
+        if(!map.has(num)){
+            map.set(num,[1])
+        }else{
+            map.get(num)[0]++
+        }
+        if(map.get(num)[0]>arr.length/4){
+        return num;
+        }
+    }
+};
