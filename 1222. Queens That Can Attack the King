@@ -1,0 +1,28 @@
+/*
+On an 8x8 chessboard, there can be multiple Black Queens and one White King.
+
+Given an array of integer coordinates queens that represents the positions of the Black Queens, and a pair of coordinates king that represent the position of the White King, return the coordinates of all the queens (in any order) that can attack the King.
+
+*/
+function queensAttacktheKing(queens, king) {
+    // starting at king, get closest queen in any direction, and thats a queen that can reach
+    var res = [];
+    // set of queens (for o(1) lookups)
+    var seen = new Set(queens.map(function (queen) { return queen.toString(); }));
+    // check all 9 directions
+    for (var i = -1; i <= 1; i++) {
+        for (var j = -1; j <= 1; j++) {
+            // go 8 steps (since max board size is 8)
+            for (var k = 1; k < 8; k++) {
+                // generate current x,y coordinate
+                var _a = [king[0] + i * k, king[1] + j * k], x = _a[0], y = _a[1];
+                // check if this is in queens (and break, because we want closest)
+                if (seen.has([x, y].toString())) {
+                    res.push([x, y]);
+                    break;
+                }
+            }
+        }
+    }
+    return res;
+}
