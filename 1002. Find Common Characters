@@ -3,6 +3,27 @@ Given an array A of strings made only from lowercase letters, return a list of a
 
 You may return the answer in any order.
 */
+
+var commonChars = function(A) {
+    let map = new Map;
+    let len = Infinity;
+    let wordMin = '';
+    for(let word of A){
+        if(word.length<len){
+            len = word.length;
+            wordMin = word;
+        }
+    }
+    wordMin = wordMin.split('');
+    let result = [];
+    wordMin.forEach(letter => {
+        if(A.every(word=>word.includes(letter))){
+            result.push(letter);
+            A = A.map(e => e.replace(letter,''));
+        }})
+    return result;
+};
+==========================================================================================================================
 var commonChars = function(A) {
     let map = new Map;
     let len = Infinity;
