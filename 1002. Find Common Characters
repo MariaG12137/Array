@@ -1,0 +1,41 @@
+/*
+Given an array A of strings made only from lowercase letters, return a list of all characters that show up in all strings within the list (including duplicates).  For example, if a character occurs 3 times in all strings but not 4 times, you need to include that character three times in the final answer.
+
+You may return the answer in any order.
+*/
+var commonChars = function(A) {
+    let map = new Map;
+    let len = Infinity;
+    let wordMin = '';
+    for(let word of A){
+        if(word.length<len){
+            len = word.length;
+            wordMin = word;
+        }
+    }
+    for(let char of wordMin){
+        if(!map.has(char)){
+            map.set(char,[1,0])
+        }else{
+            map.get(char)[0]++;
+        }
+    }
+    for(let word of A){
+        for(let char of word){
+            if(map.has(char)){
+                map.get(char)[1]++;
+            }
+        }
+        for(let value of map.values()){
+            value[0] = Math.min(value[0],value[1]);
+            value[1]=0;
+        }
+    }
+    let result = [];
+    for(let entry of map.entries()){
+        for(let i=0; i<entry[1][0]; i++){
+            result.push(entry[0]);
+        }
+    }
+    return result;
+};
