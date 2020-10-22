@@ -1,0 +1,22 @@
+var pancakeSort = function(arr) {
+    let result = [];
+    let arrSort = [...arr];
+    arrSort.sort((a,b)=>a-b);
+    let i = arrSort.length-1;
+
+    function reverse(index){
+        arr=arr.slice(0,index+1).reverse().concat(arr.slice(index+1,arr.length));
+    }  
+    while(arr.join('')!==arrSort.join('')){
+        let index = arr.indexOf(arrSort[i]);
+        
+        result.push(index+1);
+        reverse(index);
+        
+        index = i;
+        result.push(index+1);
+        reverse(index);
+        i--;
+    }
+    return result;
+};
