@@ -1,0 +1,27 @@
+/*
+Given an array arr.  You can choose a set of integers and remove all the occurrences of these integers in the array.
+
+Return the minimum size of the set so that at least half of the integers of the array are removed.
+*/
+var minSetSize = function(arr) {
+    let map = new Map();
+    for(let num of arr){
+        if(!map.has(num)){
+            map.set(num,1)
+        }else{
+            map.set(num, map.get(num)+1);
+        }
+    }
+    let arrFinal = [...map.values()];
+    arrFinal.sort((a,b)=>b-a);
+    
+    let result = 0;
+    let answer = 0;
+    for(let res of arrFinal){
+        result += res;
+        answer++;
+        if(result>=arr.length/2){
+            return answer;
+        }
+    }
+};
