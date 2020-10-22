@@ -1,0 +1,48 @@
+var numRookCaptures = function(board) {
+    let row = 0;
+    let col = 0;
+    
+    for(let i=0; i<board.length; i++){
+        for(let j=0; j<board[0].length; j++){
+            if(board[i][j]==="R"){
+                row = i;
+                col = j;
+                break;
+            }
+        }
+    }
+   
+    let result = 0;
+    let u = row+1;
+    let d = row-1;
+    let l = col-1;
+    let r = col+1;
+    while(board[row] !== undefined && board[row][l] === '.'){
+        l--;
+    }
+    while(board[row] !== undefined && board[row][r] === '.'){
+        r++;
+    }
+    while(board[u] !== undefined && board[u][col] === '.'){
+        u++;
+    }
+    while(board[d] !== undefined && board[d][col] === '.'){
+        d--;
+    }
+    
+    if(board[row] && board[row][l]==='p'){
+        result++;
+    }
+    if(board[row] && board[row][r]==='p'){
+        result++;
+    }
+    if(board[u] && board[u][col]==='p'){
+        result++;
+    }
+    if(board[d] && board[d][col]==='p'){
+        result++;
+    }
+    
+    return result;
+    
+};
