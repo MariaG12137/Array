@@ -1,0 +1,18 @@
+/*
+Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
+
+Find all the elements that appear twice in this array.
+
+Could you do it without extra space and in O(n) runtime?
+*/
+
+var findDuplicates = function(nums) {
+    const result = []; nums.unshift(0);
+    
+    for(let i = 0; i < nums.length; i++) {
+        const idx = Math.abs(nums[i]);
+        if(nums[idx] < 0) result.push(idx);
+        nums[idx] *= -1;
+    }
+    return result;    
+};
