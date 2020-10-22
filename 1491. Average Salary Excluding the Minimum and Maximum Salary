@@ -1,0 +1,13 @@
+/*
+Given an array of unique integers salary where salary[i] is the salary of the employee i.
+
+Return the average salary of employees excluding the minimum and maximum salary.
+*/
+var average = function(salary) {
+    if(salary.length === 1){
+        return salary[0].toFixed(5);
+    }
+    let total = salary.reduce((a,b)=>a+b);
+    let avg = ((total - Math.max(...salary) - Math.min(...salary))/(salary.length-2)).toFixed(5);
+    return avg;
+};
