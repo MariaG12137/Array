@@ -1,0 +1,22 @@
+/*
+Given the array queries of positive integers between 1 and m, you have to process all queries[i] (from i=0 to i=queries.length-1) according to the following rules:
+
+In the beginning, you have the permutation P=[1,2,3,...,m].
+For the current i, find the position of queries[i] in the permutation P (indexing from 0) and then move this at the beginning of the permutation P. Notice that the position of queries[i] in P is the result for queries[i].
+Return an array containing the result for the given queries.
+*/
+var processQueries = function(queries, m) {
+    let P = [];
+    let result = [];
+    for(let i=0; i<m; i++){
+        P.push(i+1);
+    }
+    console.log(P)
+    for(let num of queries){
+        let i = P.indexOf(num);
+        result.push(i);
+        P.splice(i,1);
+        P = [num].concat(P);
+    }
+    return result; 
+};
