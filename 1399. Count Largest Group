@@ -1,0 +1,27 @@
+/*
+Given an integer n. Each number from 1 to n is grouped according to the sum of its digits. 
+
+Return how many groups have the largest size.
+*/
+var countLargestGroup = function(n) {
+    let map = new Map();
+    let max = -1;
+    for(let num=1; num<=n; num++){
+        let sum = num.toString().split('').map(string => parseInt(string)).reduce((a,b)=>a+b);
+        if(!map.has(sum)){
+            map.set(sum,1);
+        }else{
+            let size = map.get(sum)+1;
+            map.set(sum,size);
+        }
+        max = Math.max(max, map.get(sum));
+    }
+    
+    let result = 0;
+    for(let entry of map.entries()){
+        if(entry[1]===max){
+            result++;
+        }
+    }
+    return result;
+};
