@@ -1,0 +1,20 @@
+/*
+Given an array of integers arr and two integers k and threshold.
+
+Return the number of sub-arrays of size k and average greater than or equal to threshold.
+*/
+var numOfSubarrays = function(arr, k, threshold) {
+    let windowL = 0;
+    let windowR = k;
+    let result = 0;
+    while(arr[windowR-1] !== undefined){
+        let arrSlice = arr.slice(windowL,windowR)
+        let avg = arrSlice.reduce((a,b) => a+b)/k;
+        if(avg>=threshold){
+            result++
+        }
+        windowL++;
+        windowR++;
+    }
+    return result;
+};
