@@ -1,0 +1,37 @@
+/*
+Given an integer k, return the minimum number of Fibonacci numbers whose sum is equal to k. The same Fibonacci number can be used multiple times.
+
+The Fibonacci numbers are defined as:
+
+F1 = 1
+F2 = 1
+Fn = Fn-1 + Fn-2 for n > 2.
+It is guaranteed that for the given constraints we can always find such Fibonacci numbers that sum up to k.
+*/
+
+var findMinFibonacciNumbers = function(k) {
+    if(k===1){
+        return 1;
+    }
+    let fib = [1,1];
+    
+    while(fib[fib.length-1]<k){
+        fib.push(fib[fib.length-1] + fib[fib.length-2]);
+    }
+
+    let result =0;
+    function findBig (num, arr){
+        if(arr.length === 0){
+            return;
+        }
+        for(let i=arr.length-1; i>=0; i--){
+            if(arr[i]<=num){
+                result++;
+                findBig(num-arr[i], arr.slice(0,i));
+                break;
+            }
+        }
+    }
+    findBig(k,fib)
+    return result;
+};
