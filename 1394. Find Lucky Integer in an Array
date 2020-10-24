@@ -1,0 +1,23 @@
+/*
+Given an array of integers arr, a lucky integer is an integer which has a frequency in the array equal to its value.
+
+Return a lucky integer in the array. If there are multiple lucky integers return the largest of them. If there is no lucky integer return -1.
+*/
+
+var findLucky = function(arr) {
+    let result = -1;
+    let map = new Map;
+    for(let num of arr){
+        if(!map.has(num)){
+            map.set(num,1);
+        }else{
+            map.set(num, map.get(num)+1);
+        }
+    }
+    for(let entry of map.entries()){
+        if(entry[0] === entry[1]){
+            result = Math.max(result, entry[0]);
+        }
+    }
+    return result;
+};
