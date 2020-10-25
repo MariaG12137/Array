@@ -1,0 +1,27 @@
+/*
+Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.
+*/
+
+/**
+ * @param {number[][]} triangle
+ * @return {number}
+ */
+var minimumTotal = function(triangle) {
+    for(let i=1; i<triangle.length; i++){
+        for(let j=0; j<triangle[i].length; j++){
+            let min = 0;
+            if(triangle[i-1][j-1]!==undefined && triangle[i-1][j] !== undefined){
+                min = Math.min(triangle[i-1][j-1],triangle[i-1][j]);
+            }else{
+                if(triangle[i-1][j-1] !== undefined){
+                    min = triangle[i-1][j-1];
+                }else{
+                    min = triangle[i-1][j];
+                }
+            }
+            
+            triangle[i][j] = triangle[i][j] + min;
+        }
+    }
+    return Math.min(...triangle[triangle.length-1])
+};
