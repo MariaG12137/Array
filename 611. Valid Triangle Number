@@ -1,0 +1,26 @@
+/*
+Given an array consists of non-negative integers, your task is to count the number of triplets chosen from the array that can make triangles if we take them as side lengths of a triangle.
+*/
+var triangleNumber = function(nums) {
+    const len = nums.length;
+    function triangle(a,b,c){
+        if(nums[a]+nums[b]>nums[c] && nums[a]+nums[c]>nums[b] && nums[b]+nums[c]>nums[a]){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    let result = 0;
+    nums.sort((a,b)=>a-b);
+    for(let i=0; i<nums.length; i++){
+        for(let j=i+1; j<nums.length; j++){
+            for(let k=j+1; k<nums.length; k++){
+                if(triangle(i,j,k)===true){
+                    result++
+                }
+            }
+        }
+    }
+  
+     return result;
+};
