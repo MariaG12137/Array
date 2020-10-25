@@ -1,0 +1,27 @@
+/*
+Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue.
+
+Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
+
+Follow up:
+
+Could you solve this problem without using the library's sort function?
+Could you come up with a one-pass algorithm using only O(1) constant space?
+*/
+var sortColors = function(nums) {
+    let lo = 0;
+    let hi = nums.length-1;
+    let cur = 0;
+    while(cur<=hi){
+        if(nums[cur]===2){
+            [nums[cur],nums[hi]]=[nums[hi],nums[cur]];
+            hi--;
+        }else if(nums[cur]===0){
+            [nums[cur],nums[lo]]=[nums[lo],nums[cur]];
+            cur++;
+            lo++;
+        }else{
+            cur++;
+        }
+    }
+};
