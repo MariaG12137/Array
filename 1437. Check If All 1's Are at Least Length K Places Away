@@ -1,0 +1,20 @@
+/*
+Given an array nums of 0s and 1s and an integer k, return True if all 1's are at least k places away from each other, otherwise return False.
+*/
+var kLengthApart = function(nums, k) {
+    let prev = null;
+    for(let i=0; i<nums.length; i++){
+        if(nums[i]===1){
+            if(prev===null){
+                prev = i;
+            }else{
+                if(i-prev<=k){
+                    return false;
+                }else{
+                    prev = i;
+                }
+            }
+        }
+    }
+    return true;
+};
