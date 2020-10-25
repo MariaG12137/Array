@@ -1,0 +1,42 @@
+/*
+Given an array A, partition it into two (contiguous) subarrays left and right so that:
+
+Every element in left is less than or equal to every element in right.
+left and right are non-empty.
+left has the smallest possible size.
+Return the length of left after such a partitioning.  It is guaranteed that such a partitioning exists.
+*/
+var partitionDisjoint = function(A) {
+    for(let i=1; i<A.length; i++){
+        if(Math.max(...A.slice(0,i))<= Math.min(...A.slice(i,A.length))){           
+            return i;
+        }
+    }
+};
+===========================================================================================================
+var partitionDisjoint = function(A) {
+    let map = new Map();
+    let max = -Infinity;
+    let min = Infinity;
+    
+    for(let i=0; i<A.length; i++){
+        if(A[i]>max){
+            max = A[i];
+        }
+        map.set(i,[max,0]);
+    }
+    
+    for(let i=A.length-1; i>0; i--){
+        if(A[i]<min){
+            min = A[i];
+        }
+        map.get(i-1)[1] = min;
+    }
+
+    for(let entry of map.entries()){
+        if(entry[1][0]<=entry[1][1]){
+            return entry[0]+1;
+        }
+    }
+   
+};
