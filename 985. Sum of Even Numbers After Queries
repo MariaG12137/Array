@@ -1,0 +1,33 @@
+/*
+We have an array A of integers, and an array queries of queries.
+
+For the i-th query val = queries[i][0], index = queries[i][1], we add val to A[index].  Then, the answer to the i-th query is the sum of the even values of A.
+
+(Here, the given index = queries[i][1] is a 0-based index, and each query permanently modifies the array A.)
+
+Return the answer to all queries.  Your answer array should have answer[i] as the answer to the i-th query.
+*/
+var maximumSwap = function(num) {
+    let numArray = num.toString().split("").map(string => parseInt(string));
+    
+    function swap (n){
+        let max = Math.max(...numArray.slice(n,numArray.length));
+        for(let i=numArray.length-1;i>=0; i--){
+            if(numArray[i]===max){
+                if(i===n || numArray[i] === numArray[n]){
+                    return false;
+                }else{
+                    [numArray[i],numArray[n]] = [numArray[n],numArray[i]];
+                    return true;
+                }
+                
+            }
+        }
+    }
+    for(let i=0; i<numArray.length;i++){
+        if(swap(i) === true){
+            break;
+        }
+    }
+    return numArray.join('');
+};
