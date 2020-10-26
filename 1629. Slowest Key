@@ -1,0 +1,21 @@
+var slowestKey = function(releaseTimes, keysPressed) {
+    let maxTime = releaseTimes[0];
+    let result = [keysPressed[0]];
+    for(let i=1; i<releaseTimes.length; i++){
+        let time = releaseTimes[i] - releaseTimes[i-1];
+        if(time>maxTime){
+            maxTime = time;
+            result = [];
+            result.push(keysPressed[i]);
+        }else if(time === maxTime){
+            result.push(keysPressed[i]);
+        }
+    }
+    let maxChar = result[0];
+    for(let i=1; i<result.length; i++){
+        if(maxChar.localeCompare(result[i])<0){
+            maxChar = result[i];
+        }
+    }
+    return maxChar;
+};
