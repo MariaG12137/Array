@@ -1,0 +1,36 @@
+/*
+Given a rectangular cake with height h and width w, and two arrays of integers horizontalCuts and verticalCuts where horizontalCuts[i] is the distance from the top of the rectangular cake to the ith horizontal cut and similarly, verticalCuts[j] is the distance from the left of the rectangular cake to the jth vertical cut.
+
+Return the maximum area of a piece of cake after you cut at each horizontal and vertical position provided in the arrays horizontalCuts and verticalCuts. Since the answer can be a huge number, return this modulo 10^9 + 7.
+*/
+/**
+ * @param {number} h
+ * @param {number} w
+ * @param {number[]} horizontalCuts
+ * @param {number[]} verticalCuts
+ * @return {number}
+ */
+var maxArea = function(h, w, horizontalCuts, verticalCuts) {
+    let horizon=[];
+    let vertical=[];
+    let modulo = Math.pow(10,9) + 7;
+    
+    horizontalCuts.sort((a,b)=>a-b);
+    verticalCuts.sort((a,b)=>a-b);
+    let prev = 0;
+    let maxHorizon = 0;
+    for(let i=0; i<horizontalCuts.length; i++){
+        maxHorizon = Math.max(maxHorizon,horizontalCuts[i] - prev)
+        prev = horizontalCuts[i];
+    }
+    maxHorizon = Math.max(maxHorizon,h - prev);
+    
+    prev = 0;
+    let maxVertical = 0;
+    for(let i=0; i<verticalCuts.length; i++){
+        maxVertical = Math.max(maxVertical, verticalCuts[i] - prev);
+        prev = verticalCuts[i];
+    }
+    maxVertical = Math.max(maxVertical, w - prev);
+    return (maxHorizon * maxVertical)%modulo;
+};
