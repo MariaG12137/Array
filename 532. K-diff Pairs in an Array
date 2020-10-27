@@ -1,0 +1,24 @@
+/*
+A k-diff pair is an integer pair (nums[i], nums[j]), where the following are true:
+
+0 <= i, j < nums.length
+i != j
+|nums[i] - nums[j]| == k
+Notice that |val| denotes the absolute value of val.
+*/
+var findPairs = function(nums, k) {
+    let result = 0;
+    let set = new Set();
+    for(let i=0; i<nums.length; i++){
+        for(let j=i+1; j<nums.length; j++){
+            if(Math.abs(nums[i] - nums[j])===k){
+                let res = [nums[i],nums[j]].sort((a,b)=>a-b);
+                if(!set.has(res[0])){
+                    result++;
+                    set.add(res[0]);
+                }
+            }
+        }
+    }
+    return result;
+};
