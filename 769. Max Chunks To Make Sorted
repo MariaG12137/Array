@@ -1,0 +1,20 @@
+/*
+Given an array arr that is a permutation of [0, 1, ..., arr.length - 1], we split the array into some number of "chunks" (partitions), and individually sort each chunk.  After concatenating them, the result equals the sorted array.
+
+What is the most number of chunks we could have made?
+*/
+var maxChunksToSorted = function(arr) {
+    arr.push(arr.length);
+    let arrSort = [...arr].sort((a,b) => a-b);
+    let temp = [];
+    let result = 0;
+    
+    for(let i=0; i<arr.length; i++){
+        temp.push(arr[i]);
+        if(temp.sort((a,b) =>a-b).join('-') === arrSort.slice(i+1-temp.length,i+1).join("-")){
+            result++;
+            temp = [];
+        }       
+    }
+    return result-1;
+};
