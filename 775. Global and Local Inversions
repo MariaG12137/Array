@@ -1,0 +1,19 @@
+var isIdealPermutation = function(A) {
+    let local = 0;
+    let global = 0;
+    for(let i=1; i<A.length; i++){
+        if(A[i-1]>A[i]){
+            local++;
+        }
+    }
+    
+    for(let i=0; i<A.length; i++){
+        for(let j=i+2; j<A.length; j++){
+            if(A[i]>A[j]){
+                global++;
+            }
+        }
+    }
+
+    return global===0;
+};
