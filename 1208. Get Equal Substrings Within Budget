@@ -1,0 +1,24 @@
+var equalSubstring = function(s, t, maxCost) {
+    let sCode = [0];
+    for(let i=0; i<s.length; i++){
+        sCode.push(s.charCodeAt(i))
+    }
+   
+    for(let i=0; i<s.length; i++){
+        sCode[i+1] = Math.abs(sCode[i+1]-t.charCodeAt(i))
+    }
+    for(let i=1; i<sCode.length; i++){
+        sCode[i] = sCode[i-1] + sCode[i];
+    }
+    
+    let result = 0;
+    for(let i=sCode.length-1; i>=0; i--){
+        for(let j=0; j<i;j++){
+            if(sCode[i]-sCode[j]<=maxCost){
+                result = Math.max(result,i-j);
+                break;
+            }
+        }
+    }
+    return result
+};
