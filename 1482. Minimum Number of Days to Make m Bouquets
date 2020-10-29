@@ -1,0 +1,33 @@
+var minDays = function(bloomDay, m, k) {
+    if(m*k > bloomDay.length){
+        return -1;
+    }
+    let l = 1;
+    let r = Math.max(...bloomDay);
+    
+    while(l<=r){
+        let flower = 0;
+        let bouquet = 0;
+        const day = Math.floor((l+r)/2);
+        
+        for(let bloom of bloomDay){
+            if(bloom>day){
+                flower = 0;
+            }else{
+                flower++;
+                if(flower>=k){
+                    bouquet++;
+                    flower = 0;
+                }
+            }
+        }
+      
+        if(bouquet<m){
+            l = day+1;
+        }else{
+            r = day-1;
+        }
+    }
+    return l;
+
+};
