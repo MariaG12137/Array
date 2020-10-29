@@ -1,0 +1,33 @@
+/*
+Given an array of integers arr of even length n and an integer k.
+
+We want to divide the array into exactly n / 2 pairs such that the sum of each pair is divisible by k.
+
+Return True If you can find a way to do that or False otherwise.
+*/
+var canArrange = function(arr, k) {
+    let map = new Map();
+    for(let num of arr){
+        const sign = num>=0?1:-1;
+        const rem = Math.abs(num%k);
+        
+        if(map.has((k-rem)*sign) && map.get((k-rem)*sign)[0]>0){
+            map.get((k-rem)*sign)[0]--;
+        }else if(map.has(rem*sign*-1) && map.get(rem*sign*-1)[0]>0){
+            map.get(rem*sign*-1)[0]--;
+        }else{
+            if(!map.has(rem*sign)){
+                map.set(rem*sign,[1])
+            }else{
+                map.get(rem*sign)[0]++;
+            }
+        }
+    }
+
+    for(let entry of map.entries()){
+        if(entry[1][0]!==0 && entry[0]!==0){
+            return false;
+        }
+    }
+    return true;
+};
