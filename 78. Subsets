@@ -1,0 +1,18 @@
+/*
+Given a set of distinct integers, nums, return all possible subsets (the power set).
+
+Note: The solution set must not contain duplicate subsets.
+*/
+var subsets = function(nums) {
+    let result = [[],[nums[0]]];
+    for(let i=1; i<nums.length; i++){
+        let len = result.length;
+        let j=0;
+        while(j<len){
+            let res = result[j].concat([nums[i]]);
+            result.push(res);
+            j++;
+        }
+    }
+    return result;
+};
