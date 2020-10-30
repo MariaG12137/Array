@@ -1,0 +1,12 @@
+var deckRevealedIncreasing = function(deck) {
+    deck = deck.sort((a,b) =>a-b);
+    let result = [];
+
+    while(deck.length !== 0){
+        if(result.length>=2){
+            result.unshift(result.pop());
+        }
+        result.unshift(deck.pop());
+    }
+    return result;
+};
