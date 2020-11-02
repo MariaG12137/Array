@@ -1,0 +1,25 @@
+var matrixReshape = function(nums, r, c) {
+    if (nums.length * nums[0].length != r*c){
+        return nums;
+    }
+    const R = nums.length;
+    const C = nums[0].length;
+    let result = [];
+    
+    let a = 0; 
+    let b = 0;
+    for(let i=0; i<R; i++){
+        for(let j=0; j<C; j++){
+            if(result[a]===undefined){
+                result[a] = [];
+            }
+            result[a][b] = nums[i][j];
+            b++;
+            if(b===c){
+                b = 0;
+                a++;
+            }
+        }
+    }
+    return result;
+}
