@@ -1,0 +1,26 @@
+/*
+You are given an array of distinct integers arr and an array of integer arrays pieces, where the integers in pieces are distinct. Your goal is to form arr by concatenating the arrays in pieces in any order. However, you are not allowed to reorder the integers in each array pieces[i].
+
+Return true if it is possible to form the array arr from pieces. Otherwise, return false.
+*/
+var canFormArray = function(arr, pieces) {
+    let map = new Map();
+    for(let piece of pieces){
+        map.set(piece[0],piece);
+    }
+    let i=0;
+    let j = 0;
+    while(i<arr.length){
+        if(map.has(arr[i])){
+            let j = i+map.get(arr[i]).length;
+          
+            if(arr.slice(i,j).join("-")!==map.get(arr[i]).join("-")){
+                return false;
+            }
+            i=j;
+        }else{
+            return false;
+        }
+    }
+    return true;
+};
