@@ -1,0 +1,12 @@
+/*
+Given an array of integers nums, sort the array in increasing order based on the frequency of the values. If multiple values have the same frequency, sort them in decreasing order.
+
+Return the sorted array.
+*/
+var frequencySort = function(nums) {
+    let map = new Map();
+    for(let num of nums){
+        map.set(num,(map.get(num)+1)||1);
+    }
+    return nums.sort((a,b)=>map.get(a) - map.get(b)||b-a);
+};
