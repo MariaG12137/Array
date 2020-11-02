@@ -1,0 +1,20 @@
+/*
+Given two integer arrays A and B, return the maximum length of an subarray that appears in both arrays.
+*/
+var findLength = function(A, B) {
+    let result = [];
+    let max = 0;
+    for(let i=A.length-1; i>=0; i--){
+        result[i] = [];
+        for(let j=B.length-1; j>=0; j--){
+            if(A[i] === B[j]){
+                result[i][j] = result[i+1]===undefined?1:(result[i+1][j+1]===undefined?1:result[i+1][j+1]+1);
+                max = Math.max(max, result[i][j]);
+            }else{
+                result[i][j] = 0;
+            }
+        }
+    }
+
+    return max;
+};
