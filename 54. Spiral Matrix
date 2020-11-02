@@ -1,0 +1,36 @@
+/*
+Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+*/
+
+var spiralOrder = function(matrix) {
+    let result = [];
+    function push(i,j){
+        result.push(matrix[i][j]);
+        matrix[i][j] = null;
+    }
+    function spiral(i,j){
+        if((matrix[i]===undefined || matrix[i][j]===undefined )|| matrix[i][j]===null){
+            return;
+        }
+        push(i,j);
+        while(matrix[i][j+1] !== undefined && matrix[i][j+1] !== null){
+            j++;
+            push(i,j);
+        }
+        while(matrix[i+1]!== undefined && matrix[i+1][j] !== undefined && matrix[i+1][j] !== null){
+            i++;
+            push(i,j);
+        }
+        while(matrix[i][j-1] !== undefined && matrix[i][j-1] !== null){
+            j--;
+            push(i,j);
+        }
+        while(matrix[i-1] && matrix[i-1][j] !== undefined && matrix[i-1][j] !== null){
+            i--;
+            push(i,j);
+        }
+        spiral(i,j+1);
+    }
+    spiral(0,0);
+    return result
+};
