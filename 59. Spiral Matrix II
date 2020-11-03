@@ -1,0 +1,37 @@
+/*
+Share
+Given a positive integer n, generate a square matrix filled with elements from 1 to n2 in spiral order.
+*/
+var generateMatrix = function(n) {
+    let array = new Array(n);
+    for(let i=0; i<n; i++){
+        array[i] = new Array(n).fill(0);
+    }
+    let num = 1;
+    function fillArray(i,j){
+        array[i][j] = num;
+        num++;
+    }
+    function spiral(i,j){
+        if((array[i]===undefined || array[i][j]===undefined) || array[i][j]!==0){
+            return;
+        }
+        fillArray(i,j);
+        while(array[i][j+1]!==undefined && array[i][j+1]===0){
+            fillArray(i,++j);
+        }
+        while(array[i+1]!==undefined && array[i+1][j]!==undefined && array[i+1][j]===0){
+            fillArray(++i,j);
+        }
+    
+        while(array[i][j-1]!==undefined && array[i][j-1]===0){
+            fillArray(i,--j);
+        }
+        while(array[i-1]!==undefined && array[i-1][j]!== undefined && array[i-1][j]===0){
+            fillArray(--i,j);
+        }
+        spiral(i,++j);
+    }
+    spiral(0,0)
+    return array;
+};
