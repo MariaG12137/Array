@@ -1,0 +1,50 @@
+/*
+Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times.
+
+Follow-up: Could you solve the problem in linear time and in O(1) space?
+*/
+var majorityElement = function(nums) {
+    // base case
+    if(nums.length === 1) return [nums[0]];
+    
+    let cand1 = null;
+    let cand2 = null;
+    let count1 = 0;
+    let count2 = 0;
+    
+    for(let i=0; i<nums.length; i++){
+        if(cand1 === nums[i]){
+            count1++;
+        }else if(cand2 === nums[i]){
+            count2++;
+        }else if(count1===0){
+            cand1 = nums[i];
+            count1++;
+        }else if(count2===0){
+            cand2 = nums[i];
+            count2++;
+        }else{
+            count1--;
+            count2--;
+        }
+    }
+    const len = Math.floor(nums.length/3);
+    let result = [];
+    let appear1 = 0;
+    let appear2 = 0;
+    nums.forEach((num)=>{
+        if(num===cand1){
+            appear1++;
+        }
+        if(num===cand2){
+            appear2++;
+        }
+    })
+    if(appear1>len){
+        result.push(cand1);
+    }
+    if(appear2>len){
+        result.push(cand2);
+    }
+    return result;
+};
