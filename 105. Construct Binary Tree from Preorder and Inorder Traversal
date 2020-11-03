@@ -1,0 +1,29 @@
+/*
+Given preorder and inorder traversal of a tree, construct the binary tree.
+
+Note:
+You may assume that duplicates do not exist in the tree.
+*/
+var buildTree = function(preorder, inorder) {
+    const n = inorder.length;
+    
+    let map = new Map();
+    for(let i=0; i<n; i++){
+        map.set(inorder[i],i);
+    }
+    let prevIdx = 0;
+    return traverse(0,n-1)
+    
+    function traverse(left,right){
+        if(left>right){
+            return null;
+        }
+        const currVal = preorder[prevIdx++];
+        let newNode = new TreeNode(currVal);
+        const currIdx = map.get(currVal);
+        
+        newNode.left = traverse(left,currIdx-1);
+        newNode.right = traverse(currIdx+1,right);
+        return newNode;
+    }
+};
