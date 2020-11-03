@@ -1,0 +1,39 @@
+/*
+Given a 2D board and a word, find if the word exists in the grid.
+
+The word can be constructed from letters of sequentially adjacent cells, where "adjacent" cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+*/
+
+var exist = function(board, word) {
+    const dirs = [[-1,0],[1,0],[0,1],[0,-1]];
+    const row = board.length;
+    const col = board[0].length;
+    function backtrack(i,j,idx){
+        if(idx>=word.length){
+            return true;
+        }
+        if(i<0||j<0||i>=row||j>=col||board[i][j]!==word[idx]){
+            return false;
+        }
+        board[i][j] = '#';
+        
+        let match = false;
+        for(let dir of dirs){
+            match = backtrack(i+dir[0],j+dir[1],idx+1);
+            if(match===true){
+                break;
+            }
+        }
+        board[i][j] = word[idx];
+        return match;
+    }
+    for(let i=0; i<row; i++){
+        for(let j=0; j<col; j++){
+            if(backtrack(i,j,0)){
+                return true;
+            }
+        }
+    }
+    
+    return false;
+};
