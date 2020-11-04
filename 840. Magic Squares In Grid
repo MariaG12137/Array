@@ -1,0 +1,65 @@
+var numMagicSquaresInside = function(grid) {
+    let result = 0;
+    let numbers = "123456789";
+    
+    function magicSquare (a,b){
+        let array = [];
+        for(let i=-1; i<=1; i++){
+            for(let j=-1; j<=1; j++){
+                array.push(grid[a+i][b+j]);
+            }
+        }
+ 
+        if(array.sort().join("")!==numbers){
+            return false;
+        }
+
+        let sum = null;
+        for(let i=-1; i<=1;i++){
+            let rowSum = 0;
+            for(let j=-1; j<=1;j++){
+                rowSum += grid[a+i][b+j];
+            }
+            if(sum===null){
+                sum = rowSum;
+            }else if(sum !== rowSum){
+                return false;
+            }
+        }
+        
+        for(let j=-1; j<=1; j++){
+            let colSum = 0;
+            for(let i=-1; i<=1; i++){
+                colSum += grid[a+i][b+j];
+            }
+            if(sum !== colSum){
+                return false;
+            }
+        }
+        let diag1 = 0;
+        let diag2 = 0;
+        for(let i=-1; i<=1; i++){
+            for(let j=-1; j<=1; j++){
+                if(i===j){
+                    diag1 += grid[a+i][b+j];
+                }
+                if(i===-j){
+                    diag2 += grid[a+i][b+j];
+                }
+            }
+        }
+        if(diag1 !==sum || diag2 !== sum){
+            return false;
+        }
+        return true;
+    }
+    for(let i=1; i<grid.length-1;i++){
+        for(let j=1; j<grid[0].length-1;j++){
+            if(magicSquare(i,j)){
+                result++;
+            }
+        }
+    }
+    
+    return result;
+};
