@@ -26,3 +26,31 @@ function queensAttacktheKing(queens, king) {
     }
     return res;
 }
+==========================================================================================================================
+function queensAttacktheKing(queens, king) {
+    let set = new Set(queens.map(queen=>queen.join("")));
+    let result = [];
+    
+    function traverse(i,j,dirX,dirY){
+        const x = dirX;
+        const y = dirY;
+        
+        while(i+dirX<8 && j+dirY<8 && i+dirX>=0 && j+dirY>=0){
+            if(set.has([i+dirX,j+dirY].join(""))){
+                result.push([i+dirX,j+dirY]);
+                break;
+            }
+            dirX += x;
+            dirY += y;
+        }
+    }
+    
+    for(let i=-1; i<=1; i++){
+        for(let j=-1; j<=1;j++){
+            if(!(i===0 && j===0)){
+                traverse(king[0],king[1],i,j);
+            }
+        }
+    }
+    return result;
+}
