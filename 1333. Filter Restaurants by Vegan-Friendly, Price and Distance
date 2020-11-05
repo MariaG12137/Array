@@ -1,0 +1,13 @@
+var filterRestaurants = function(restaurants, veganFriendly, maxPrice, maxDistance) {
+    let result = [];
+    let ans = [];
+    for(let restaurant of restaurants){
+        if((restaurant[2]&&veganFriendly||!veganFriendly) && restaurant[3]<=maxPrice && restaurant[4]<=maxDistance){
+            result.push(restaurant);
+        }
+    }
+ 
+    result.sort((a,b)=>b[1]-a[1] || b[0]-a[0]);
+    result.forEach(elm => ans.push(elm[0]));
+    return ans;
+};
