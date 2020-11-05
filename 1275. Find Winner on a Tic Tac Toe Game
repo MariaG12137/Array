@@ -1,0 +1,37 @@
+var tictactoe = function(moves) {
+    let grid = new Array(3);
+    for(let i=0; i<3; i++){
+        grid[i] = new Array(3).fill(null);
+    }
+    for(let i=0; i<moves.length; i++){
+        console.log(moves[i],grid);
+        let x = moves[i][0];
+        let y = moves[i][1];
+        if(i%2===0){
+            grid[x][y] = 'A';
+        }else{
+            grid[x][y] = 'B';
+        }
+    }
+    function check(){
+        for(let i=0; i<3; i++){
+            if(grid[i][0] && grid[i][0]===grid[i][1] && grid[i][1]===grid[i][2]){
+                return grid[i][0];
+            }
+        }
+        for(let j=0; j<3; j++){
+            if(grid[0][j] && grid[0][j]===grid[1][j] && grid[1][j]===grid[2][j]){
+                return grid[0][j];
+            }
+        }
+        if(grid[1][1] && grid[0][0]===grid[1][1] && grid[1][1]===grid[2][2]){
+            return grid[1][1];
+        }
+        if(grid[1][1] && grid[0][2]===grid[1][1] && grid[1][1]===grid[2][0]){
+            return grid[1][1];
+        }
+        
+        return moves.length===9?"Draw":"Pending";
+    }
+    return check();
+};
