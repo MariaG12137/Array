@@ -1,0 +1,31 @@
+var rankTeams = function(votes) {
+    let map = new Map();
+    for(let vote of votes){
+        for(let i=0; i<vote.length; i++){
+            if(!map.has(vote[i])){
+                map.set(vote[i],new Array(26).fill(0));
+            }
+            map.get(vote[i])[i]+=1;
+        }
+    }
+    
+    let result = [];
+    for(let key of map.keys()){
+        result.push(key);
+    }
+    
+    result.sort(function(a,b){
+        for(let i=0; i<26; i++){
+            console.log(i,a,map.get(a)[i],b,map.get(b)[i])
+            if((map.get(b)[i] - map.get(a)[i])>0){
+                return 1;
+            }
+            if((map.get(b)[i] - map.get(a)[i])<0){
+                return -1;
+            }
+        }
+    return a.charCodeAt(0)-b.charCodeAt(0);
+    })
+    return result.join("");
+    
+};
