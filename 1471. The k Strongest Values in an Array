@@ -16,3 +16,16 @@ var getStrongest = function(arr, k) {
     arr.sort((a,b)=>Math.abs(b-median)-Math.abs(a-median)||b-a);
     return arr.slice(0,k)
 };
+================================================================================================================================
+var getStrongest = function(arr, k) {
+    const mid = Math.floor((arr.length-1)/2);
+    let arrSort = [...arr].sort((a,b)=>a-b);
+    const median = arrSort[mid];
+    
+    if(arrSort.length>=2*k){
+        arrSort = arrSort.slice(0,k).concat(arrSort.slice(arrSort.length-k,arrSort.length));
+    }
+    
+    arrSort.sort((a,b)=>Math.abs(b-median)-Math.abs(a-median)||b-a);
+    return arrSort.slice(0,k)
+};
