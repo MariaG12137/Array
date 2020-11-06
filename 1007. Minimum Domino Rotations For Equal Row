@@ -1,0 +1,37 @@
+var minDominoRotations = function(A, B) {
+    let possible = [];
+    for(let i=1; i<=6; i++){
+        let poss = true;
+        for(let j=0; j<A.length; j++){
+            if(A[j]!==i && B[j]!==i){
+                poss = false;
+                break;
+            }
+        }
+        if(poss === true){
+            possible.push(i);
+        }
+    }
+    console.log(possible)
+    if(possible.length===0){
+        return -1;
+    }
+    
+    let result = Infinity;
+    for(let poss of possible){
+        let countA = 0;
+        let countB = 0;
+        for(let a of A){
+            if(a !== poss){
+                countA++;
+            }
+        }
+        for(let b of B){
+            if(b !== poss){
+                countB++;
+            }
+        }
+        result = Math.min(result,countA,countB);
+    }
+    return result;
+};
