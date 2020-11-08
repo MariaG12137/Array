@@ -1,0 +1,21 @@
+/*
+Given an array of integers A with even length, return true if and only if it is possible to reorder it such that A[2 * i + 1] = 2 * A[2 * i] for every 0 <= i < len(A) / 2.
+*/
+var canReorderDoubled = function(A) {
+    let map = new Map();
+    let total=0;
+    
+    for(let i=0; i<A.length; i++){
+        map.set(A[i], map.has(A[i])?map.get(A[i])+1:1);
+    }
+    A.sort((a,b)=>Math.abs(a)-Math.abs(b));
+    
+    for(let a of A){
+        if(map.get(a)>0 && map.get(2*a)>0){
+            map.set(a,map.get(a)-1);
+            map.set(2*a,map.get(2*a)-1);
+            total+=2;
+        }
+    }
+    return total===A.length;
+};
