@@ -1,0 +1,22 @@
+var maxSumTwoNoOverlap = function(A, L, M) {
+    A.unshift(0);
+    let max = 0;
+    
+    for(let i=1; i<A.length; i++){
+        A[i] = A[i] + A[i-1];
+    }
+    
+    function findMax(array,len){
+        let max = 0;
+        for(let i=0; i<array.length-len; i++){
+            max = Math.max(max,array[i+len]-array[i])
+        }
+        return max;
+    }
+    
+    for(let i=0; i<A.length; i++){
+        max = Math.max(max,findMax(A.slice(0,i+1),L)+findMax(A.slice(i,A.length),M));
+        max = Math.max(max,findMax(A.slice(0,i+1),M)+findMax(A.slice(i,A.length),L));
+    }
+    return max;
+};
