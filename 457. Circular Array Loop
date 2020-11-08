@@ -1,0 +1,50 @@
+/*
+Given a circular array C of integers represented by A, find the maximum possible sum of a non-empty subarray of C.
+
+Here, a circular array means the end of the array connects to the beginning of the array.  (Formally, C[i] = A[i] when 0 <= i < A.length, and C[i+A.length] = C[i] when i >= 0.)
+
+Also, a subarray may only include each element of the fixed buffer A at most once.  (Formally, for a subarray C[i], C[i+1], ..., C[j], there does not exist i <= k1, k2 <= j with k1 % A.length = k2 % A.length.)
+*/
+
+var circularArrayLoop = function(nums) {
+    let traveled = new Set();
+    let current = new Set();
+    
+    for(let i=0; i<nums.length; i++){
+        if(!traveled.has(i)){
+            let sign = nums[i]>0?1:-1;
+            let p = i;
+            let prev = -1;
+            
+            while(true){
+                if(nums[p]===undefined){
+                    break;
+                }
+                if(nums[p]===0){
+                    current.add(p);
+                    break;
+                }
+                
+                let signP = nums[p]>0?1:-1;
+                if(sign !==signP){
+                    break;
+                }
+                
+                if(p===prev){
+                    break;
+                }
+                
+                if(current.has(p)){
+                    return true;
+                }
+            
+                current.add(p);
+                prev = p;
+                p = (p+nums[p])>=0? (p+nums[p])%nums.length:nums.length+(p+nums[p])%nums.length;
+            }
+            traveled = new Set([...traveled,...current]);
+            current.clear();
+        }
+    }
+    return false;
+};
