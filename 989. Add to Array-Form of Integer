@@ -1,0 +1,35 @@
+var addToArrayForm = function(A, K) {
+    A = A.reverse();
+    K = K.toString().split("").map(str=>parseInt(str)).reverse();
+    
+    let result = [];
+
+    function add(i,incre){
+        if(A[i]===undefined && K[i]===undefined){
+            if(incre===1){
+                result.push(1);
+            }
+            return;
+        }
+        
+        if(A[i]===undefined){
+            A[i] = 0;
+        }
+        
+        if(K[i]===undefined){
+            K[i] = 0;
+        }
+        
+        if(A[i]+K[i]+incre>=10){
+            result.push(A[i]+K[i]+incre-10);
+            incre = 1;
+        }else{
+            result.push(A[i]+K[i]+incre);
+            incre = 0;
+        }
+        add(i+1,incre);
+    }
+    add(0,0);
+ 
+    return result.reverse()
+};
