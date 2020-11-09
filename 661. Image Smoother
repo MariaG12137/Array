@@ -1,0 +1,28 @@
+var imageSmoother = function(M) {
+    let result = new Array(M.length);
+    for(let i=0; i<result.length; i++){
+        result[i] = new Array(M).fill(0);
+    }
+
+    function smooth(a,b){
+        let total = 0;
+        let count = 0;
+        for(let i=-1; i<=1; i++){
+            for(let j=-1; j<=1; j++){
+                if(M[a+i]!==undefined && M[a+i][b+j]!==undefined){
+                    total += M[a+i][b+j];
+                    count++;
+                }
+            }
+        }
+        result[a][b] = Math.floor(total/count);
+    }
+  
+    for(let i=0; i<M.length; i++){
+        for(let j=0; j<M[0].length; j++){
+            smooth(i,j);
+        }
+    }
+
+    return result;
+};
