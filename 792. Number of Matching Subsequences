@@ -1,0 +1,41 @@
+var numMatchingSubseq = function(S, words) {
+    let map = new Map();
+    for(let i=0; i<S.length; i++){
+        if(!map.has(S[i])){
+            map.set(S[i],[]);
+        }
+        map.get(S[i]).push(i);
+    }
+
+    let count = 0;
+    
+    for(let word of words){
+        let index = 0;
+        let include = true;
+        
+        for(let char of word){
+            let includeChar = false;
+            
+            if(map.has(char)){
+                for(let dic of map.get(char)){
+                    if(dic>=index){
+                        includeChar = true;
+                        index = dic+1;
+                        break;
+                    }
+                }
+            }else{
+                include = false;
+                break;
+            }
+            if(includeChar === false){
+                include = false;
+                break;
+            }   
+        }
+        if(include === true){
+            count++;
+        }
+    }
+    return count;
+};
