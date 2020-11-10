@@ -1,0 +1,25 @@
+/*
+Given a list of lists of integers, nums, return all elements of nums in diagonal order as shown in the below images.
+ 
+*/
+var findDiagonalOrder = function(nums) {
+    let result = [];
+    let res = [];
+    let i=0;
+    for(let row of nums){
+        for(let j=0; j<row.length; j++){
+            if(result[i+j]===undefined){
+                result[i+j] = [];
+            }
+        
+            result[i+j].push(nums[i][j]);
+        }
+        i++;
+    }
+    for(let r of result){
+        for(let i=r.length-1; i>=0; i--){
+            res.push(r[i])
+        }
+    }  
+    return res;
+};
